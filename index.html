@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sommerfest Klasse 3c – Mithilfe & Spenden</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-dark:  #3A5C32;
+    --green-mid:   #4A6741;
+    --green-light: #97C459;
+    --green-pale:  #C0DD97;
+    --green-wash:  #EAF3DE;
+    --pink:        #D4537E;
+    --pink-light:  #ED93B1;
+    --pink-pale:   #FFF0F5;
+    --gold:        #EF9F27;
+    --gold-light:  #FAC775;
+    --cream:       #FDFAF4;
+    --cream-dark:  #F2EDE3;
+    --text:        #2A2A28;
+    --text-soft:   #6A6A60;
+    --border:      #D8CFC0;
+    --radius:      14px;
+    --shadow:      0 4px 32px rgba(58,92,50,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background-color: #1A6B3A;
+    background-image: radial-gradient(circle, #D4AEEA 1.2px, transparent 1.2px);
+    background-size: 18px 18px;
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+    color: var(--text);
+  }
+
+  .card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 6px 6px 0px #2C2C2A, 0 0 0 4px #2C2C2A;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #D4AEEA;
+    padding: 28px 32px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid #2C2C2A;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(26,107,58,0.15) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+    pointer-events: none;
+  }
+  .header-flora { font-size: 22px; letter-spacing: 6px; color: #1A6B3A; margin-bottom: 8px; }
+  .header h1 {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: clamp(26px, 7vw, 44px);
+    font-weight: 900;
+    color: #1A6B3A;
+    line-height: 1.1;
+    text-shadow: 2px 2px 0 #0F4525;
+    letter-spacing: 2px;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    background: #1A6B3A;
+    color: #fff;
+    padding: 8px 24px;
+    border-radius: 4px;
+    border: 3px solid #0F4525;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-family: Impact, 'Arial Black', sans-serif;
+    box-shadow: 3px 3px 0 #2C2C2A;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    padding: 22px 28px 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-soft);
+    border-bottom: 1.5px dashed #C39FD8;
+  }
+  .intro strong { color: #1A3DAA; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    border-bottom: 4px solid #2C2C2A;
+    background: #1A6B3A;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 13px 8px;
+    border: none;
+    border-right: 2px solid #2C2C2A;
+    background: #1A6B3A;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-bottom: 4px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-shadow: none;
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn:hover { background: #24924F; }
+  .tab-btn.active {
+    color: #7B3FA0;
+    background: var(--cream);
+    border-bottom: 4px solid #7B3FA0;
+  }
+
+  /* ── CONTENT ── */
+  .tab-content { display: none; padding: 24px 28px; }
+  .tab-content.active { display: block; }
+
+  .section-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #7B3FA0;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .info-box {
+    background: #F0E6F8;
+    border-left: 4px solid #1A6B3A;
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #0F4525;
+    font-weight: 700;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #7B3FA0;
+  }
+  input, select, textarea {
+    padding: 10px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 0 0 3px rgba(74,103,65,0.10);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 26px;
+    border: none;
+    border-radius: 24px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.3px;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+  .btn:active { transform: translateY(0); }
+  .btn-green { background: #1A6B3A; color: #fff; }
+  .btn-pink  { background: #7B3FA0; color: #fff; }
+  .btn-sm {
+    padding: 4px 11px;
+    font-size: 11px;
+    border-radius: 10px;
+    border: none;
+    background: #fee2e2;
+    color: #b91c1c;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .btn-sm:hover { background: #fecaca; }
+
+  .toast {
+    display: none;
+    margin-top: 14px;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    animation: fadeIn 0.3s ease;
+  }
+  .toast.success { background: var(--green-wash); border: 1.5px solid var(--green-light); color: var(--green-dark); display: block; }
+  .toast.error   { background: #fee2e2; border: 1.5px solid #fca5a5; color: #b91c1c; display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── TABLE ── */
+  .entries-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .entries-table th {
+    background: var(--green-wash);
+    color: var(--green-dark);
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid var(--green-pale);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .entries-table td { padding: 9px 12px; border-bottom: 1px solid var(--cream-dark); vertical-align: middle; }
+  .entries-table tr:hover td { background: var(--green-wash); }
+  .empty-row { text-align: center; color: #bbb; font-style: italic; padding: 20px; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-food { background: #FEF3C7; color: #92400E; }
+  .badge-help { background: #D1FAE5; color: #065F46; }
+  .badge-gift { background: #EDE0F5; color: #7B3FA0; }
+
+  /* ── GIFT ── */
+  .gift-highlight {
+    background: linear-gradient(135deg, #EDE0F5, #DCF0E6);
+    border: 1.5px dashed #C39FD8;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+  }
+  .gift-highlight p { font-size: 13px; line-height: 1.8; color: var(--text-soft); margin-bottom: 6px; }
+  .teachers {
+    display: flex;
+    gap: 10px;
+    margin: 12px 0 6px;
+  }
+  .teacher-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+    border: 1px solid #D4AEEA;
+  }
+  .teacher-card .avatar { font-size: 28px; margin-bottom: 4px; }
+  .teacher-card .tname { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--green-dark); }
+  .teacher-card .trole { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
+
+  .donation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 14px;
+    border-bottom: 1px solid #E8D5F5;
+    font-size: 13px;
+  }
+  .donation-item:last-child { border-bottom: none; }
+  .donation-total {
+    text-align: right;
+    font-size: 16px;
+    font-weight: 700;
+    color: #7B3FA0;
+    padding-top: 10px;
+    border-top: 2px solid #D4AEEA;
+    margin-top: 6px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── SPINNER ── */
+  .loading { display: flex; align-items: center; gap: 8px; color: var(--text-soft); font-size: 13px; padding: 12px 0; }
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid var(--green-pale);
+    border-top-color: var(--green-mid);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #1A6B3A;
+    border-top: 4px solid #2C2C2A;
+    text-align: center;
+    padding: 16px;
+    color: #fff;
+    font-size: 13px;
+    font-family: Impact, 'Arial Black', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,50,0.3);
+  }
+
+  @media (max-width: 500px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .teachers { flex-direction: column; }
+    .tab-content { padding: 18px 16px; }
+    .info-grid { grid-template-columns: 1fr; }
+    body { padding: 12px 8px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-flora">★ ✦ ★</div>
+    <h1>Sommerfest Klasse 3c</h1>
+    <div class="header-badge">📅 11. Juni 2026</div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Liebe Eltern, liebe Kinder — damit es ein toller Nachmittag für alle wird, bitten wir euch um eure Mithilfe — beim <strong>Mitbringen von Leckereien</strong>, beim <strong>Aufbau & Abbau</strong> und einer <strong>Spende</strong> für Frau Macho & Frau Bach.</p>
+    <p style="margin-top:8px;">👇 <strong>Einfach eintragen — keine Anmeldung nötig!</strong> Alle Einträge werden automatisch gespeichert.</p>
+    <p style="margin-top:8px;font-size:13px;color:var(--text-soft);">Wählt einfach den passenden Reiter aus und tragt euch ein:<br/>🍰 <strong>Essen & Trinken</strong> — was ihr mitbringt &nbsp;·&nbsp; 🔨 <strong>Aufbau helfen</strong> — wer mit anpackt &nbsp;·&nbsp; 🎁 <strong>Geschenk & Spende</strong> — für unsere Lehrerinnen</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('food',this)">🍰 Essen & Trinken</button>
+    <button class="tab-btn" onclick="showTab('help',this)">🔨 Aufbau helfen</button>
+    <button class="tab-btn" onclick="showTab('gift',this)">🎁 Geschenk & Spende</button>
+    <button class="tab-btn" onclick="showTab('list',this)">📋 Alle Einträge</button>
+    <button class="tab-btn" onclick="showTab('admin',this)">🔐 Admin</button>
+  </div>
+
+  <!-- ── FOOD ── -->
+  <div id="tab-food" class="tab-content active">
+    <div class="section-head">🍰 Wer bringt was mit?</div>
+    <div class="info-box">
+      Folgendes wird noch gebraucht — tragt ein, was ihr mitbringen könnt:
+      <div class="info-grid">
+        <div>🍰 Kuchen & Gebäck</div>
+        <div>🥗 Salate & Dips</div>
+        <div>🍉 Obst & Snacks</div>
+        <div>🥤 Säfte & Wasser</div>
+        <div>🍕 Herzhafte Sachen</div>
+        <div>🍭 Süßigkeiten</div>
+        <div>☕ Kaffee</div>
+        <div>🥛 Milch</div>
+      </div>
+    </div>
+
+    <!-- Geschirr Hinweis -->
+    <div style="background:#F0E6F8;border-left:4px solid #1A6B3A;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.7;color:var(--text-soft);">
+      🍽️ <strong style="color:var(--green-dark);">Bitte Geschirr mitbringen!</strong> Jede Familie bringt bitte eigene <strong>Tassen, Becher und Besteck</strong> für sich mit. Danke!
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Dein Name</label>
+        <input type="text" id="food-name" placeholder="z.B. Familie Müller"/>
+      </div>
+      <div class="form-group">
+        <label>Was bringst du mit?</label>
+        <select id="food-cat">
+          <option value="">— bitte wählen —</option>
+          <option>🍰 Kuchen / Gebäck</option>
+          <option>🥗 Salat / Dips</option>
+          <option>🍉 Obst / Snacks</option>
+          <option>🥤 Säfte / Wasser</option>
+          <option>🍕 Herzhafte Sachen</option>
+          <option>🍭 Süßigkeiten</option>
+          <option>☕ Kaffee</option>
+          <option>🥛 Milch</option>
+          <option>🍽️ Sonstiges</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Beschreibung (optional)</label>
+        <input type="text" id="food-detail" placeholder="z.B. Erdbeer-Sahne-Torte, ca. 12 Stücke"/>
+      </div>
+    </div>
+    <button class="btn btn-green" onclick="submit('food')">✓ Eintragen</button>
+    <div class="toast" id="toast-food"></div>
+  </div>
+
+  <!-- ── HELP ── -->
+  <div id="tab-help" class="tab-content">
+    <div class="section-head">🔨 Aufbau & Abbau</div>
+    <div class="info-box">
+      Wir suchen fleißige Helfer! Meldet euch für folgende Aufgaben:
+      <div class="info-grid">
+        <div>🏗️ Aufbau ab 15:30 Uhr</div>
+        <div>🎈 Deko aufhängen</div>
+        <div>🍽️ Tische & Stühle</div>
+        <div>🧹 Abbau & Aufräumen</div>
+        <div>📸 Fotos machen</div>
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Dein Name</label>
+        <input type="text" id="help-name" placeholder="z.B. Thomas Becker"/>
+      </div>
+      <div class="form-group">
+        <label>Womit kannst du helfen?</label>
+        <select id="help-cat">
+          <option value="">— bitte wählen —</option>
+          <option>🏗️ Aufbau ab 15:30 Uhr</option>
+          <option>🎈 Deko aufhängen</option>
+          <option>🍽️ Tische & Stühle stellen</option>
+          <option>🧹 Abbau & Aufräumen</option>
+          <option>📸 Fotos machen</option>
+          <option>💪 Sonstiges</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Wann kannst du?</label>
+        <select id="help-time">
+          <option>Ab 15:30 Uhr (Aufbau)</option>
+          <option>Ab 16:00 Uhr (Aufbau)</option>
+          <option>Während des Festes</option>
+          <option>Beim Abbau & Aufräumen</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Kontakt (optional)</label>
+        <input type="text" id="help-contact" placeholder="Telefon für Rückfragen"/>
+      </div>
+    </div>
+    <button class="btn btn-green" onclick="submit('help')">✓ Eintragen</button>
+    <div class="toast" id="toast-help"></div>
+  </div>
+
+  <!-- ── GIFT ── -->
+  <div id="tab-gift" class="tab-content">
+    <div class="section-head">🎁 Geschenk für unsere Lehrerinnen</div>
+    <div class="gift-highlight">
+      <p>Unsere wunderbaren Pädagoginnen begleiten die Kinder jeden Tag mit Herzblut und Engagement. Zum Sommerfest möchten wir ihnen gemeinsam eine Freude bereiten! 💕</p>
+      <div class="teachers">
+        <div class="teacher-card">
+          <div class="avatar">🌸</div>
+          <div class="tname">Frau Macho</div>
+          <div class="trole">Klassenlehrerin</div>
+        </div>
+        <div class="teacher-card">
+          <div class="avatar">🌻</div>
+          <div class="tname">Frau Bach</div>
+          <div class="trole">Erzieherin</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW TO DONATE box -->
+    <div style="background:linear-gradient(135deg,#EDE0F5,#DCF0E6);border:1.5px solid #D4AEEA;border-radius:12px;padding:18px 20px;margin-bottom:20px;">
+      <p style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#7B3FA0;margin-bottom:10px;">💌 So funktioniert die Spende</p>
+      <p style="font-size:13px;line-height:1.8;color:var(--text-soft);margin-bottom:12px;">
+        Ihr entscheidet selbst, wie viel ihr beitragen möchtet — jeder Betrag ist herzlich willkommen!<br/>
+        Bitte überweist euren Beitrag direkt per <strong>PayPal oder Überweisung</strong> an folgende Adresse:
+      </p>
+      <div style="background:white;border-radius:10px;padding:14px 18px;border:1px solid #D4AEEA;text-align:center;">
+        <p style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-soft);margin-bottom:6px;">PayPal / E-Mail</p>
+        <a href="mailto:k.hardegen@posteo.de" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#7B3FA0;text-decoration:none;letter-spacing:0.5px;">k.hardegen@posteo.de</a>
+        <p style="font-size:12px;color:var(--text-soft);margin-top:8px;">Verwendungszweck: <strong>Sommerfest Klasse 3c – Geschenk</strong></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ALL ENTRIES ── -->
+  <div id="tab-list" class="tab-content">
+    <div class="section-head">📋 Alle Einträge</div>
+    <div id="list-loading" class="loading"><div class="spinner"></div>Lade Einträge...</div>
+    <div id="list-wrap" style="display:none;overflow-x:auto;">
+      <table class="entries-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Art</th>
+            <th>Kategorie</th>
+            <th>Details</th>
+            <th>Datum</th>
+          </tr>
+        </thead>
+        <tbody id="entries-body"></tbody>
+      </table>
+      <div style="margin-top:8px;text-align:right;font-size:12px;color:var(--text-soft);">
+        Gesamt: <strong id="entry-count">0</strong> Einträge
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ADMIN ── -->
+  <div id="tab-admin" class="tab-content">
+
+    <!-- Login -->
+    <div id="admin-login">
+      <div class="section-head">🔐 Admin-Bereich</div>
+      <div class="info-box" style="margin-bottom:18px;">
+        Nur für Organisatoren. Bitte Passwort eingeben um Einträge zu verwalten und zu löschen.
+      </div>
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Passwort</label>
+          <input type="password" id="admin-pw" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"/>
+        </div>
+      </div>
+      <button class="btn btn-green" onclick="adminLogin()">🔓 Einloggen</button>
+      <div class="toast" id="toast-admin"></div>
+    </div>
+
+    <!-- Admin Panel (hidden until login) -->
+    <div id="admin-panel" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div class="section-head" style="margin-bottom:0;">⚙️ Einträge verwalten</div>
+        <button class="btn" style="background:#f1f1f1;color:var(--text-soft);font-size:12px;padding:6px 14px;" onclick="adminLogout()">Ausloggen</button>
+      </div>
+
+      <!-- Filter -->
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="btn" style="font-size:12px;padding:6px 14px;background:#1A6B3A;color:#fff;" onclick="adminLoad('all')">Alle</button>
+        <button class="btn" style="font-size:12px;padding:6px 14px;background:#FEF3C7;color:#92400E;" onclick="adminLoad('food')">🍰 Essen</button>
+        <button class="btn" style="font-size:12px;padding:6px 14px;background:#D1FAE5;color:#065F46;" onclick="adminLoad('help')">🔨 Aufbau</button>
+        <button class="btn" style="font-size:12px;padding:6px 14px;background:#EDE0F5;color:#7B3FA0;" onclick="adminLoad('gift')">🎁 Spende</button>
+      </div>
+
+      <!-- Stats -->
+      <div id="admin-stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;"></div>
+
+      <!-- Table -->
+      <div style="overflow-x:auto;">
+        <table class="entries-table" id="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Art</th>
+              <th>Kategorie</th>
+              <th>Details</th>
+              <th>Datum</th>
+              <th style="width:60px;text-align:center;">Löschen</th>
+            </tr>
+          </thead>
+          <tbody id="admin-body"></tbody>
+        </table>
+      </div>
+      <div id="admin-loading" class="loading" style="display:none;"><div class="spinner"></div>Lade...</div>
+
+      <!-- Delete all button -->
+      <div style="margin-top:16px;padding-top:14px;border-top:1px dashed #D4AEEA;text-align:right;">
+        <button class="btn" style="background:#fee2e2;color:#b91c1c;font-size:12px;padding:7px 16px;" onclick="deleteAll()">🗑️ Alle Einträge löschen</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">🌿 Sommerfest Klasse 3c · 11. Juni 2026 · Danke für eure Unterstützung! 🌿</div>
+</div>
+
+<script>
+const SUPA_URL = 'https://xluacgeehzfudufjdxez.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsdWFjZ2VlaHpmdWR1ZmpkeGV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1ODAyOTUsImV4cCI6MjA5NDE1NjI5NX0.WkMnERtfu24hrz4AgdqATj3MzqezHjgh8dSExlOBmys';
+const HEADERS = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' };
+
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'list') loadAll();
+  if (name === 'gift') loadDonations();
+  if (name === 'admin' && adminLoggedIn) adminLoad('all');
+}
+
+function toast(type, msg, isErr) {
+  const el = document.getElementById('toast-' + type);
+  el.className = 'toast ' + (isErr ? 'error' : 'success');
+  el.textContent = msg;
+  setTimeout(() => { el.className = 'toast'; }, 4000);
+}
+
+async function submit(type) {
+  let body = {};
+  if (type === 'food') {
+    const name = document.getElementById('food-name').value.trim();
+    const cat  = document.getElementById('food-cat').value;
+    const det  = document.getElementById('food-detail').value.trim();
+    if (!name || !cat) { toast(type, '⚠️ Bitte Name und Kategorie ausfüllen.', true); return; }
+    body = { typ: 'food', name, kategorie: cat, detail: det || '—', betrag: null };
+    document.getElementById('food-name').value = '';
+    document.getElementById('food-cat').value = '';
+    document.getElementById('food-detail').value = '';
+  } else if (type === 'help') {
+    const name = document.getElementById('help-name').value.trim();
+    const cat  = document.getElementById('help-cat').value;
+    const time = document.getElementById('help-time').value;
+    const con  = document.getElementById('help-contact').value.trim();
+    if (!name || !cat) { toast(type, '⚠️ Bitte Name und Aufgabe ausfüllen.', true); return; }
+    body = { typ: 'help', name, kategorie: cat, detail: time + (con ? ' · ' + con : ''), betrag: null };
+    document.getElementById('help-name').value = '';
+    document.getElementById('help-cat').value = '';
+    document.getElementById('help-contact').value = '';
+  } else if (type === 'gift') {
+    const name    = document.getElementById('gift-name').value.trim();
+    const confirm = document.getElementById('gift-confirm').value;
+    const note    = document.getElementById('gift-note').value.trim();
+    if (!name) { toast(type, '⚠️ Bitte deinen Namen eintragen.', true); return; }
+    body = { typ: 'gift', name, kategorie: confirm, detail: note || '—', betrag: null };
+    document.getElementById('gift-name').value = '';
+    document.getElementById('gift-note').value = '';
+  }
+
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/eintraege', { method: 'POST', headers: HEADERS, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(await res.text());
+    const msgs = { food: '✅ Super! Vielen Dank — dein Eintrag ist gespeichert!', help: '✅ Wunderbar! Du bist dabei. Herzlichen Dank!', gift: '✅ Vielen herzlichen Dank für deine Spende! 🌸' };
+    toast(type, msgs[type], false);
+    if (type === 'gift') loadDonations();
+  } catch(e) {
+    toast(type, '❌ Fehler beim Speichern. Bitte nochmal versuchen.', true);
+    console.error(e);
+  }
+}
+
+async function loadAll() {
+  document.getElementById('list-loading').style.display = 'flex';
+  document.getElementById('list-wrap').style.display = 'none';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/eintraege?select=*&order=erstellt_am.desc', { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY } });
+    const data = await res.json();
+    document.getElementById('entry-count').textContent = data.length;
+    const tbody = document.getElementById('entries-body');
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="5" class="empty-row">Noch keine Einträge vorhanden.</td></tr>';
+    } else {
+      tbody.innerHTML = data.map(e => {
+        const cls = e.typ === 'food' ? 'badge-food' : e.typ === 'help' ? 'badge-help' : 'badge-gift';
+        const label = e.typ === 'food' ? 'Essen & Trinken' : e.typ === 'help' ? 'Aufbau & Abbau' : 'Spende';
+        const date = e.erstellt_am ? new Date(e.erstellt_am).toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'2-digit' }) : '—';
+        return `<tr>
+          <td><strong>${e.name}</strong></td>
+          <td><span class="badge ${cls}">${label}</span></td>
+          <td>${e.kategorie || '—'}</td>
+          <td style="font-size:12px;color:var(--text-soft);">${e.detail || '—'}${e.betrag ? ' · <strong>' + e.betrag + '</strong>' : ''}</td>
+          <td style="font-size:12px;color:var(--text-soft);">${date}</td>
+        </tr>`;
+      }).join('');
+    }
+    document.getElementById('list-loading').style.display = 'none';
+    document.getElementById('list-wrap').style.display = 'block';
+  } catch(e) {
+    document.getElementById('list-loading').innerHTML = '❌ Fehler beim Laden.';
+    console.error(e);
+  }
+}
+
+async function loadDonations() {
+  const list = document.getElementById('donation-list');
+  list.innerHTML = '<div class="loading"><div class="spinner"></div>Lade...</div>';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/eintraege?typ=eq.gift&select=*&order=erstellt_am.desc', { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY } });
+    const data = await res.json();
+    if (!data.length) {
+      list.innerHTML = '<p style="text-align:center;color:#bbb;font-style:italic;padding:16px 12px;">Noch niemand eingetragen — seid die Ersten! 💕</p>';
+      return;
+    }
+    const statusIcon = s => s && s.includes('Bargeld') ? '💵' : s && s.includes('melde') ? '⏳' : '✅';
+    let html = data.map(e => {
+      const note = e.detail && e.detail !== '—' ? `<span style="font-size:11px;color:var(--text-soft);margin-left:6px;">· ${e.detail}</span>` : '';
+      return `<div class="donation-item">
+        <span>${statusIcon(e.kategorie)} <strong>${e.name}</strong>${note}</span>
+        <span style="font-size:12px;color:var(--pink);font-weight:700;">${e.kategorie || ''}</span>
+      </div>`;
+    }).join('');
+    html += `<div style="padding:8px 14px 12px;text-align:right;font-size:12px;color:var(--text-soft);">${data.length} Familie${data.length !== 1 ? 'n' : ''} dabei 💕</div>`;
+    list.innerHTML = html;
+  } catch(e) {
+    list.innerHTML = '<p style="color:#b91c1c;padding:12px;">❌ Fehler beim Laden.</p>';
+  }
+}
+
+// Load donations on start
+loadDonations();
+
+// ── ADMIN ──
+const ADMIN_PW = 'Sommerfest2026';
+let adminLoggedIn = false;
+
+function adminLogin() {
+  const pw = document.getElementById('admin-pw').value;
+  if (pw === ADMIN_PW) {
+    adminLoggedIn = true;
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    adminLoad('all');
+  } else {
+    const t = document.getElementById('toast-admin');
+    t.className = 'toast error';
+    t.textContent = '❌ Falsches Passwort. Bitte nochmal versuchen.';
+    setTimeout(() => t.className = 'toast', 3500);
+  }
+}
+
+function adminLogout() {
+  adminLoggedIn = false;
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-pw').value = '';
+}
+
+async function adminLoad(filter) {
+  const loading = document.getElementById('admin-loading');
+  const tbody = document.getElementById('admin-body');
+  loading.style.display = 'flex';
+  tbody.innerHTML = '';
+
+  let url = SUPA_URL + '/rest/v1/eintraege?select=*&order=erstellt_am.desc';
+  if (filter !== 'all') url += '&typ=eq.' + filter;
+
+  try {
+    const res = await fetch(url, { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY } });
+    const data = await res.json();
+    loading.style.display = 'none';
+
+    // Stats
+    const all = await fetch(SUPA_URL + '/rest/v1/eintraege?select=*', { headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY } });
+    const allData = await all.json();
+    const food = allData.filter(e => e.typ === 'food').length;
+    const help = allData.filter(e => e.typ === 'help').length;
+    const gift = allData.filter(e => e.typ === 'gift').length;
+    document.getElementById('admin-stats').innerHTML = `
+      <div style="background:#FEF3C7;border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:20px;">🍰</div>
+        <div style="font-size:20px;font-weight:700;color:#92400E;">${food}</div>
+        <div style="font-size:11px;color:#92400E;">Essen</div>
+      </div>
+      <div style="background:#D1FAE5;border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:20px;">🔨</div>
+        <div style="font-size:20px;font-weight:700;color:#065F46;">${help}</div>
+        <div style="font-size:11px;color:#065F46;">Helfer</div>
+      </div>
+      <div style="background:#EDE0F5;border-radius:8px;padding:10px;text-align:center;">
+        <div style="font-size:20px;">🎁</div>
+        <div style="font-size:20px;font-weight:700;color:#7B3FA0;">${gift}</div>
+        <div style="font-size:11px;color:#7B3FA0;">Spenden</div>
+      </div>`;
+
+    if (!data.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-row">Keine Einträge gefunden.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = data.map(e => {
+      const cls = e.typ === 'food' ? 'badge-food' : e.typ === 'help' ? 'badge-help' : 'badge-gift';
+      const label = e.typ === 'food' ? 'Essen' : e.typ === 'help' ? 'Aufbau' : 'Spende';
+      const date = e.erstellt_am ? new Date(e.erstellt_am).toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' }) : '—';
+      return `<tr id="row-${e.id}">
+        <td><strong>${e.name}</strong></td>
+        <td><span class="badge ${cls}">${label}</span></td>
+        <td style="font-size:12px;">${e.kategorie || '—'}</td>
+        <td style="font-size:12px;color:var(--text-soft);">${e.detail || '—'}</td>
+        <td style="font-size:11px;color:var(--text-soft);">${date}</td>
+        <td style="text-align:center;">
+          <button class="btn-sm" onclick="deleteEntry(${e.id})">🗑️</button>
+        </td>
+      </tr>`;
+    }).join('');
+  } catch(err) {
+    loading.style.display = 'none';
+    tbody.innerHTML = '<tr><td colspan="6" style="color:#b91c1c;padding:12px;">❌ Fehler beim Laden.</td></tr>';
+  }
+}
+
+async function deleteEntry(id) {
+  if (!confirm('Diesen Eintrag wirklich löschen?')) return;
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/eintraege?id=eq.' + id, {
+      method: 'DELETE',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    if (res.ok) {
+      const row = document.getElementById('row-' + id);
+      if (row) row.remove();
+    } else {
+      alert('Fehler beim Löschen.');
+    }
+  } catch(e) {
+    alert('Fehler: ' + e.message);
+  }
+}
+
+async function deleteAll() {
+  if (!confirm('⚠️ Wirklich ALLE Einträge löschen? Das kann nicht rückgängig gemacht werden!')) return;
+  if (!confirm('Bist du sicher? Alle Daten werden unwiderruflich gelöscht!')) return;
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/eintraege?id=gte.0', {
+      method: 'DELETE',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    if (res.ok) {
+      adminLoad('all');
+    } else {
+      alert('Fehler beim Löschen.');
+    }
+  } catch(e) {
+    alert('Fehler: ' + e.message);
+  }
+}
+
+</script>
+</body>
+</html>
